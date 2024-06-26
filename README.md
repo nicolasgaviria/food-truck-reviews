@@ -61,6 +61,7 @@ The application is deployed on Vercel. You can access it [here](https://food-tru
 - Implement a more detailed food truck profile page.
 - Optimize performance for larger datasets.
 - Store the keys in a secure way.
+- Add a loading spinner and a better error page.
 
 ## Future Work
 

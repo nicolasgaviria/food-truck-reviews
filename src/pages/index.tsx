@@ -8,7 +8,7 @@ import FoodTruckList from "@/components/FoodTruckList";
 const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 
 const Home: React.FC = () => {
-  const { data: foodTrucks, isLoading, error } = useFetchFoodTrucks();
+  const { data: foodTrucks, isLoading, isError } = useFetchFoodTrucks();
 
   const [closestTrucks, setClosestTrucks] = useState<FoodTruckWithDistance[]>(
     []
@@ -39,10 +39,10 @@ const Home: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return null;
   }
 
-  if (error) {
+  if (isError) {
     return <div>Error loading data</div>;
   }
 
@@ -59,9 +59,14 @@ const Home: React.FC = () => {
           <Autocomplete
             apiKey={apiKey}
             className="h-12 text-neutral-200 bg-neutral-700 px-4 rounded border border-neutral-300"
-            onPlaceSelected={({ geometry: { location } }) =>
-              handleLocationSelect(location.lat(), location.lng())
-            }
+            onPlaceSelected={(place) => {
+              if (place) {
+                handleLocationSelect(
+                  place.location.lat(),
+                  place.location.lng()
+                );
+              }
+            }}
             options={{
               types: [],
               componentRestrictions: { country: "us" },
