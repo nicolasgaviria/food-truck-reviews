@@ -8,7 +8,9 @@ export const mapCSVResponseToFoodTrucks = (
     applicant: foodTruck.Applicant,
     facilityType: foodTruck.FacilityType,
     address: foodTruck.Address,
-    foodItems: foodTruck.FoodItems,
+    foodItems: foodTruck.FoodItems
+      ? foodTruck.FoodItems.split(":").map((type) => type.trim())
+      : [],
     latitude: foodTruck.Latitude,
     longitude: foodTruck.Longitude,
   }));

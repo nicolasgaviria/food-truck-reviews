@@ -1,22 +1,36 @@
 import React from "react";
-import { FoodTruck } from "@/api";
+import { FoodTruckWithDistance } from "@/api";
+import { formatDistance } from "@/shared";
 
 interface FoodTruckListProps {
-  foodTrucks: FoodTruck[];
+  foodTrucks: FoodTruckWithDistance[];
 }
 
 const FoodTruckList: React.FC<FoodTruckListProps> = ({ foodTrucks }) => {
   return (
-    <ul>
+    <div className="flex flex-col">
       {foodTrucks.map((truck) => (
-        <li key={truck.locationId}>
-          <h3>{truck.applicant}</h3>
-          <p>{truck.facilityType}</p>
-          <p>{truck.address}</p>
-          <p>{truck.foodItems}</p>
-        </li>
+        <div key={truck.locationId} className="flex px-2 py-4">
+          <div className="flex flex-col">
+            <p className="text-xl font-bold">{truck.applicant}</p>
+            <p className="text-neutral-400 italic">{truck.address}</p>
+            <p className="text-neutral-400">
+              {formatDistance(truck.distance)}
+            </p>
+            <div className="flex flex-col gap-1 mt-2">
+              {truck.foodItems.slice(0, 3).map((type) => (
+                <span
+                  key={type}
+                  className="text-xs text-neutral-300 capitalize"
+                >
+                  {type}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 

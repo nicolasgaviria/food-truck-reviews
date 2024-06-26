@@ -13,9 +13,13 @@ export interface FoodTruck {
   applicant: string;
   facilityType: string;
   address: string;
-  foodItems: string;
+  foodItems: string[];
   latitude: string;
   longitude: string;
+}
+
+export interface FoodTruckWithDistance extends FoodTruck {
+  distance: number;
 }
 
 export interface UserLocation {

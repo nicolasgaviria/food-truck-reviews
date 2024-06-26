@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Autocomplete from "react-google-autocomplete";
 import haversineDistance from "haversine-distance";
-import { FoodTruck, useFetchFoodTrucks } from "@/api";
+import { FoodTruck, FoodTruckWithDistance, useFetchFoodTrucks } from "@/api";
 import FoodTruckList from "@/components/FoodTruckList";
 
 const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
@@ -10,7 +10,9 @@ const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 const Home: React.FC = () => {
   const { data: foodTrucks, isLoading, error } = useFetchFoodTrucks();
 
-  const [closestTrucks, setClosestTrucks] = useState<FoodTruck[]>([]);
+  const [closestTrucks, setClosestTrucks] = useState<FoodTruckWithDistance[]>(
+    []
+  );
 
   const handleLocationSelect = (latitude: number, longitude: number) => {
     if (foodTrucks) {
@@ -49,20 +51,24 @@ const Home: React.FC = () => {
       <Head>
         <title>Find a nearby food truck!</title>
       </Head>
-      <div>
-        <h1>Find Closest Food Trucks</h1>
-        <Autocomplete
-          apiKey={apiKey}
-          style={{ width: "90%" }}
-          onPlaceSelected={({ geometry: { location } }) =>
-            handleLocationSelect(location.lat(), location.lng())
-          }
-          options={{
-            types: [],
-            componentRestrictions: { country: "us" },
-          }}
-        />
-        <FoodTruckList foodTrucks={closestTrucks} />
+      <div className="w-96 mx-auto my-8">
+        <div className="flex flex-col gap-4 w-full">
+          <h1 className="text-2xl font-bold text-center">
+            Find a nearby food truck in SF!
+          </h1>
+          <Autocomplete
+            apiKey={apiKey}
+            className="h-12 text-neutral-200 bg-neutral-700 px-4 rounded border border-neutral-300"
+            onPlaceSelected={({ geometry: { location } }) =>
+              handleLocationSelect(location.lat(), location.lng())
+            }
+            options={{
+              types: [],
+              componentRestrictions: { country: "us" },
+            }}
+          />
+          <FoodTruckList foodTrucks={closestTrucks} />
+        </div>
       </div>
     </>
   );
