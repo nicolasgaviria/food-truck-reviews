@@ -1,40 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Food Truck Locator
 
-## Getting Started
+## Description
 
-First, run the development server:
+This project provides a web application that allows users to find the closest food trucks in San Francisco based on their current location. Users can enter their address, and the app will display the nearest food trucks on a map.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Address autocomplete using Google Places API
+- Display nearest food trucks with their details
+- Show distance from the user's location to the food trucks
+- Link to Google Maps for directions
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Setup and Installation
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. **Clone the Repository**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   ```bash
+   git clone https://github.com/yourusername/food-truck-locator.git
+   cd food-truck-locator
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. **Install Dependencies**
 
-## Learn More
+   ```bash
+   yarn install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Create Environment Variables**
+   Create a .env.local file in the root directory and add your Google API key:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   NEXT_PUBLIC_GOOGLE_API_KEY=your_google_api_key
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. **Run the Application**
 
-## Deploy on Vercel
+   ```bash
+   yarn dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Run Tests**
+   ```bash
+   yarn test
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployment
+
+The application is deployed on Vercel. You can access it [here](https://food-truck-reviews.vercel.app/).
+
+## Design Decisions and Trade-offs
+
+- **Google Places API:** Chosen for address autocomplete due to its reliability and ease of integration.
+- **React Query** Used for data fetching and caching to simplify data management.
+- **Tailwind CSS:** Utilized for quick and responsive styling.
+- **Environmental Variables:** The Google API key is currently exposed in the client side code, which can lead to security issues. This decision was made to save some time.
+
+## Potential Improvements
+
+- Add filtering options for food trucks (e.g., by cuisine type).
+- Implement a more detailed food truck profile page.
+- Optimize performance for larger datasets.
+- Store the keys in a secure way.
+
+## Future Work
+
+- Integrate user reviews and ratings for food trucks.
+- Add a feature to save favorite food trucks.
+
+## License
+
+This project is licensed under the MIT License.
