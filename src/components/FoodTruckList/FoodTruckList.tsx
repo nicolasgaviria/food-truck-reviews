@@ -34,6 +34,7 @@ const FoodTruckList: React.FC<FoodTruckListProps> = ({ foodTrucks }) => {
             <a
               className="flex justify-center items-center size-8 rounded-full border border-neutral-100"
               href={`https://www.google.com/maps/search/?api=1&query=${truck.latitude}%2C${truck.longitude}`}
+              title="Open location in Google Maps"
               target="_blank"
               rel="noopener"
             >
