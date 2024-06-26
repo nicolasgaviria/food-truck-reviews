@@ -61,10 +61,8 @@ const Home: React.FC = () => {
             className="h-12 text-neutral-200 bg-neutral-700 px-4 rounded border border-neutral-300"
             onPlaceSelected={(place) => {
               if (place) {
-                handleLocationSelect(
-                  place.location.lat(),
-                  place.location.lng()
-                );
+                const location = place.geometry.location;
+                handleLocationSelect(location.lat(), location.lng());
               }
             }}
             options={{
